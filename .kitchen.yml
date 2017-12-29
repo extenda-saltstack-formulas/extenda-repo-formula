@@ -13,7 +13,11 @@ provisioner:
     top.sls:
       base:
         "*":
-          - extenda-repo
+          - testing
+    testing.sls:
+      iam:
+        access_key: AKIAJF2Q7WK3WOIB7MAA
+        secret_key: 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
   grains:
     customer: bar
 
@@ -23,6 +27,3 @@ platforms:
 
 suites:
   - name: default
-    provisioner:
-      pillars-from-files:
-        extenda-repo.sls: test/pillar/iam.sls
