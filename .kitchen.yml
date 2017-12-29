@@ -8,7 +8,7 @@ provisioner:
   state_top:
     base:
       '*':
-        - extenda-repo
+        - init
   pillars:
     top.sls:
       base:
