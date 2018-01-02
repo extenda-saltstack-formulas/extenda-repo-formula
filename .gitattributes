@@ -1,0 +1,1 @@
+vault.sls filter=git-crypt diff=git-crypt
