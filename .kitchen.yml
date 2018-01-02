@@ -2,28 +2,33 @@
 driver:
   name: vagrant
 
+platforms:
+  - name: centos-7.3
+
 provisioner:
   name: salt_solo
   is_file_root: true
+  salt_copy_filter:
+    - .git
+    - .gitignore
+    - .kitchen
+    - .kitchen.yml
+    - Gemfile
+    - Gemfile.lock
   state_top:
     base:
       '*':
-        - init
+        - extenda-repo
   pillars:
     top.sls:
       base:
         "*":
-          - testing
-    testing.sls:
-      iam:
-        access_key: AKIAJF2Q7WK3WOIB7MAA
-        secret_key: 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
+          - vault
   grains:
     customer: bar
 
-platforms:
-  - name: centos-7.3
-
-
 suites:
   - name: default
+    provisioner:
+      pillars-from-files:
+        vault.sls: vault.sls
