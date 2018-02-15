@@ -47,7 +47,7 @@ extenda-develop-pos-repo-create:
   pkgrepo.managed:
     - name: "extenda-pos-dev"
     - enabled: True
-    - humanname: "Extenda Centraloffice (dev)"
+    - humanname: "Extenda POS (dev)"
     - baseurl: https://s3-eu-west-1.amazonaws.com/extenda-packages/{{ grains["customer"] }}/develop/pos
     - gpgcheck: 0 #we'll change to 1 later once we get PGP signing working
 
