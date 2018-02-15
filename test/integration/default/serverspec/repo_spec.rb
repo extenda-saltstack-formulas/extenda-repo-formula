@@ -3,11 +3,11 @@ require 'serverspec'
 # Required by serverspec
 set :backend, :exec
 
-describe yumrepo("extenda") do
+describe yumrepo("extenda-centraloffice") do
   it { should exist }
 end
 
-describe yumrepo("extenda") do
+describe yumrepo("extenda-centraloffice") do
   it { should be_enabled }
 end
 
@@ -22,14 +22,14 @@ end
 # check to see if we can connect to the private yum repo at
 # https://s3-eu-west-1.amazonaws.com/extenda-packages/bar
 # and find the package named 'bello'
-describe command("yum search bello") do
+describe command("yum repolist") do
   its(:exit_status) { should eq 0 }
 end
 
-describe command("yum install -y bello") do
-  its(:exit_status) { should eq 0 }
-end
+# describe command("yum install -y bello") do
+#   its(:exit_status) { should eq 0 }
+# end
 
-describe package("bello") do
-  it {should be_installed}
-end
+# describe package("bello") do
+#   it {should be_installed}
+# end
