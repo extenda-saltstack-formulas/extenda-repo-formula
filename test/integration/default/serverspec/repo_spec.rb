@@ -3,11 +3,19 @@ require 'serverspec'
 # Required by serverspec
 set :backend, :exec
 
-describe yumrepo("extenda-centraloffice") do
+describe yumrepo("extenda-centraloffice-release") do
   it { should exist }
 end
 
-describe yumrepo("extenda-centraloffice") do
+describe yumrepo("extenda-centraloffice-release") do
+  it { should be_enabled }
+end
+
+describe yumrepo("extenda-centraloffice-develop") do
+  it { should exist }
+end
+
+describe yumrepo("extenda-centraloffice-develop") do
   it { should be_enabled }
 end
 

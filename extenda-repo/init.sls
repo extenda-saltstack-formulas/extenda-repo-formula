@@ -1,3 +1,9 @@
+{% if pillar.extenda_repo is defined and pillar.extenda_repo.channels is defined %}
+{% set channels = pillar.extenda_repo.channels %}
+{% else %}
+{% set channels = ['release', 'develop'] %}
+{% endif %}
+
 extenda-s3-yum-plugin-conf:
   file.managed:
     - name: /etc/yum/pluginconf.d/extenda-s3.conf
@@ -11,50 +17,28 @@ extenda-s3-yum-plugin:
     - source: salt://extenda-repo/files/extenda-s3.py
     - mode: 644
 
-extenda-release-centraloffice-repo-create:
+{% for channel in channels %}
+extenda-release-centraloffice-repo-create-{{ channel }}:
   pkgrepo.managed:
-    - name: "extenda-centraloffice"
+    - name: "extenda-centraloffice-{{ channel }}"
     - enabled: True
-    - humanname: "Extenda Centraloffice"
-    - baseurl: https://s3-eu-west-1.amazonaws.com/extenda-packages/{{ grains["customer"] }}/release/centraloffice
+    - humanname: "Extenda Centraloffice ({{ channel }})"
+    - baseurl: https://s3-eu-west-1.amazonaws.com/extenda-packages/{{ grains["customer"] }}/{{ channel }}/centraloffice
     - gpgcheck: 0 #we'll change to 1 later once we get PGP signing working
 
-extenda-release-pos-repo-create:
+extenda-release-pos-repo-create-{{ channel }}:
   pkgrepo.managed:
-    - name: "extenda-pos"
+    - name: "extenda-pos-{{ channel }}"
     - enabled: True
-    - humanname: "Extenda POS"
-    - baseurl: https://s3-eu-west-1.amazonaws.com/extenda-packages/{{ grains["customer"] }}/release/pos
+    - humanname: "Extenda POS ({{ channel }})"
+    - baseurl: https://s3-eu-west-1.amazonaws.com/extenda-packages/{{ grains["customer"] }}/{{ channel }}/pos
     - gpgcheck: 0 #we'll change to 1 later once we get PGP signing working
 
-extenda-release-setupdata-repo-create:
+extenda-release-setupdata-repo-create-{{ channel }}:
   pkgrepo.managed:
-    - name: "extenda-setupdata"
+    - name: "extenda-setupdata-{{ channel }}"
     - enabled: True
-    - humanname: "Extenda Setupdata"
-    - baseurl: https://s3-eu-west-1.amazonaws.com/extenda-packages/{{ grains["customer"] }}/release/setupdata
+    - humanname: "Extenda Setupdata ({{ channel }})"
+    - baseurl: https://s3-eu-west-1.amazonaws.com/extenda-packages/{{ grains["customer"] }}/{{ channel }}/setupdata
     - gpgcheck: 0 #we'll change to 1 later once we get PGP signing working
-
-extenda-develop-centraloffice-repo-create:
-  pkgrepo.managed:
-    - name: "extenda-centraloffice-dev"
-    - enabled: True
-    - humanname: "Extenda Centraloffice (dev)"
-    - baseurl: https://s3-eu-west-1.amazonaws.com/extenda-packages/{{ grains["customer"] }}/develop/centraloffice
-    - gpgcheck: 0 #we'll change to 1 later once we get PGP signing working
-
-extenda-develop-pos-repo-create:
-  pkgrepo.managed:
-    - name: "extenda-pos-dev"
-    - enabled: True
-    - humanname: "Extenda POS (dev)"
-    - baseurl: https://s3-eu-west-1.amazonaws.com/extenda-packages/{{ grains["customer"] }}/develop/pos
-    - gpgcheck: 0 #we'll change to 1 later once we get PGP signing working
-
-extenda-develop-setupdata-repo-create:
-  pkgrepo.managed:
-    - name: "extenda-setupdata-dev"
-    - enabled: True
-    - humanname: "Extenda Setupdata (dev)"
-    - baseurl: https://s3-eu-west-1.amazonaws.com/extenda-packages/{{ grains["customer"] }}/develop/setupdata
-    - gpgcheck: 0 #we'll change to 1 later once we get PGP signing working
+{% endfor %}

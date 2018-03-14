@@ -19,16 +19,30 @@ provisioner:
     base:
       '*':
         - extenda-repo
-  pillars:
-    top.sls:
-      base:
-        "*":
-          - vault
   grains:
     customer: test-customer
 
 suites:
   - name: default
     provisioner:
+      pillars:
+        top.sls:
+          base:
+            '*':
+              - vault
       pillars-from-files:
         vault.sls: vault.sls
+  - name: channel-develop
+    provisioner:
+      pillars-from-files:
+        vault.sls: vault.sls
+      pillars:
+        top.sls:
+          base:
+            '*':
+              - vault
+              - channels
+        channels.sls:
+          extenda_repo:
+            channels:
+              - develop
