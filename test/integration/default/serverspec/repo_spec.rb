@@ -19,6 +19,22 @@ describe yumrepo("extenda-centraloffice-develop") do
   it { should be_enabled }
 end
 
+describe yumrepo("extenda-storeagent-release") do
+  it { should exist }
+end
+
+describe yumrepo("extenda-storeagent-release") do
+  it { should be_enabled }
+end
+
+describe yumrepo("extenda-storeagent-develop") do
+  it { should exist }
+end
+
+describe yumrepo("extenda-storeagent-develop") do
+  it { should be_enabled }
+end
+
 describe file("/etc/yum/pluginconf.d/extenda-s3.conf") do
   it { should exist }
 end

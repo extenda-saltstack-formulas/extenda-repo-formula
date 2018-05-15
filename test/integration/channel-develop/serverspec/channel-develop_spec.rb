@@ -14,3 +14,15 @@ end
 describe yumrepo("extenda-centraloffice-develop") do
   it { should be_enabled }
 end
+
+describe yumrepo("extenda-selfscan-release") do
+  it { should_not exist }
+end
+
+describe yumrepo("extenda-selfscan-develop") do
+  it { should exist }
+end
+
+describe yumrepo("extenda-selfscan-develop") do
+  it { should be_enabled }
+end

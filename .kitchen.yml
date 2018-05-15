@@ -3,7 +3,7 @@ driver:
   name: vagrant
 
 platforms:
-  - name: centos-7.3
+  - name: centos/7
 
 provisioner:
   name: salt_solo
