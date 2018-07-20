@@ -4,7 +4,7 @@
   {% set channels = ['release', 'develop'] %}
 {% endif %}
 
-{% set products = ['centraloffice', 'pos', 'eps', 'setupdata', 'selfscan','storeagent'] %}
+{% set products = ['centraloffice', 'pos', 'eps', 'setupdata', 'selfscan','storeagent', 'eip'] %}
 
 extenda-s3-yum-plugin-conf:
   file.managed:
@@ -20,7 +20,7 @@ extenda-s3-yum-plugin:
     - mode: 644
 
 {% for channel in channels %}
-  {% for product in products %} 
+  {% for product in products %}
 extenda-release-{{ product }}-repo-create-{{ channel }}:
   pkgrepo.managed:
     - name: "extenda-{{ product }}-{{ channel }}"
