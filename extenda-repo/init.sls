@@ -4,7 +4,7 @@
   {% set channels = ['release', 'develop'] %}
 {% endif %}
 
-{% set products = ['centraloffice', 'pos', 'eps', 'setupdata', 'selfscan','storeagent', 'eip'] %}
+{% set products = ['centraloffice', 'pos', 'eps', 'setupdata', 'selfscan','storeagent', 'eip', 'selfcheckout'] %}
 
 extenda-s3-yum-plugin-conf:
   file.managed:
