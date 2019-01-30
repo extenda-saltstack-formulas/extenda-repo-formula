@@ -30,12 +30,3 @@ extenda-release-{{ product }}-repo-create-{{ channel }}:
     - gpgcheck: 0 #we'll change to 1 later once we get PGP signing working
   {% endfor %}
 {% endfor %}
-
-enable-extenda-mysql-repo:
-  pkgrepo.managed:
-    - name: "extenda-mysql-repo"
-    - enabled: True
-    - humanname: "Extenda mysql repo"
-    - baseurl: https://s3-eu-west-1.amazonaws.com/extenda-packages/mysql
-    - gpgcheck: 0
-
